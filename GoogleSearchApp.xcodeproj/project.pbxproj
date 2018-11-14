@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F2E0ACE2199FC6000D00BAE /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E0ACD2199FC6000D00BAE /* SearchAPI.swift */; };
+		1F2E0AD0219A085400D00BAE /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E0ACF219A085400D00BAE /* LoadOperation.swift */; };
+		1F2E0AD2219A086600D00BAE /* ParseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E0AD1219A086600D00BAE /* ParseOperation.swift */; };
+		1F38D0ED219AD32200815553 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38D0EC219AD32200815553 /* AsyncOperation.swift */; };
 		1FF8FA922188561200A5CCFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8FA912188561200A5CCFD /* AppDelegate.swift */; };
 		1FF8FA942188561200A5CCFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8FA932188561200A5CCFD /* ViewController.swift */; };
 		1FF8FA972188561200A5CCFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF8FA952188561200A5CCFD /* Main.storyboard */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F2E0ACD2199FC6000D00BAE /* SearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
+		1F2E0ACF219A085400D00BAE /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
+		1F2E0AD1219A086600D00BAE /* ParseOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseOperation.swift; sourceTree = "<group>"; };
+		1F38D0EC219AD32200815553 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		1FF8FA8E2188561200A5CCFD /* GoogleSearchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleSearchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF8FA912188561200A5CCFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF8FA932188561200A5CCFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +68,10 @@
 				1FF8FA982188561400A5CCFD /* Assets.xcassets */,
 				1FF8FA9A2188561400A5CCFD /* LaunchScreen.storyboard */,
 				1FF8FA9D2188561400A5CCFD /* Info.plist */,
+				1F38D0EC219AD32200815553 /* AsyncOperation.swift */,
+				1F2E0ACF219A085400D00BAE /* LoadOperation.swift */,
+				1F2E0AD1219A086600D00BAE /* ParseOperation.swift */,
+				1F2E0ACD2199FC6000D00BAE /* SearchAPI.swift */,
 			);
 			path = GoogleSearchApp;
 			sourceTree = "<group>";
@@ -135,8 +147,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F2E0ACE2199FC6000D00BAE /* SearchAPI.swift in Sources */,
 				1FF8FA942188561200A5CCFD /* ViewController.swift in Sources */,
+				1F2E0AD2219A086600D00BAE /* ParseOperation.swift in Sources */,
 				1FF8FA922188561200A5CCFD /* AppDelegate.swift in Sources */,
+				1F2E0AD0219A085400D00BAE /* LoadOperation.swift in Sources */,
+				1F38D0ED219AD32200815553 /* AsyncOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
