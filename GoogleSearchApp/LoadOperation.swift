@@ -33,11 +33,10 @@ class LoadOperation: AsyncOperation {
     }
     
     override func main() {
-        guard self.state != .finished else { print("LoadOperation cancel"); return }
-        asyncLoadWith(request: request) { /*[unowned self]*/ (data) in
-            guard self.state != .finished else { print("LoadOperation cancel"); return }
+        guard self.state != .finished else { return }
+        asyncLoadWith(request: request) { (data) in
+            guard self.state != .finished else { return }
             self.outputData = data
-            print("self.outputData: \(self.outputData!)")
             self.state = .finished
         }
     }
@@ -47,7 +46,6 @@ class LoadOperation: AsyncOperation {
     func asyncLoadWith(request: URLRequest, complition: @escaping((Data?) -> ())) {
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
             if let data = data {
-                print("Load data: \(data)")
                 complition(data)
             }
         }

@@ -93,22 +93,15 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     // MARK: - Actions
 
-    @objc private func googleSearchButtonAction(sender: UIButton) {
-
-        // FIXME: идентификатор проекта: skilled-tiger-221019
-        // FIXME: идентификатор поисковой системы: 005505095743673218968:ploiaiqzo0c
-        
+    @objc private func googleSearchButtonAction(sender: UIButton) {        
         if !isLoading {
             isLoading = true
-            googleSearchButton.setTitle("Stop", for: .normal)
-            googleSearchButton.backgroundColor = .red
+            refreshButtonWith(color: .red, title: "Stop")
             call()
         } else {
-            googleSearchButton.setTitle("Google Search", for: .normal)
-            googleSearchButton.backgroundColor = .green
+            refreshButtonWith(color: .green, title: "Google Search")
             api.operationCancel()
             isLoading = false
-            print("Thread canceled========================================================================")
         }
     }
 
@@ -118,22 +111,50 @@ class ViewController: UIViewController, UITableViewDataSource {
         if let string = searchBar.text {
             if !string.isEmpty {
                 api.operationStartWith(searchText: string) { (returnLinksArray) in
-                    print("returnLinksArray")
-
+                    
                     if let array = returnLinksArray {
-                        print("returnLinksArray")
                         self.linksArray = array
                         self.isLoading = false
-                        DispatchQueue.main.async {
-                            self.googleSearchButton.setTitle("Google Search", for: .normal)
-                            self.googleSearchButton.backgroundColor = .green
+                        self.refreshButtonWith(color: .green, title: "Google Search") {
+                            self.tableView.reloadData()
+                        }
+                    } else {
+                        self.linksArray = []
+                        self.refreshButtonWith(color: .green, title: "Google Search") {
+                            self.createAlert()
                             self.tableView.reloadData()
                         }
                     }
                 }
+            } else {
+                createAlert()
+                refreshButtonWith(color: .green, title: "Google Search")
+                isLoading = false
             }
-        } else {
-            print("add text to search bar")
+        }
+    }
+    
+    private func refreshButtonWith(color: UIColor, title: String, action:  (( )-> Void)? = nil) {
+        DispatchQueue.main.async {
+            action?()
+            self.googleSearchButton.setTitle(title, for: .normal)
+            self.googleSearchButton.backgroundColor = color
+        }
+    }
+    
+    private func createAlert() {
+        if let text = searchBar.text {
+            if !text.isEmpty {
+                let alert = UIAlertController(title: nil, message: "По запросу \(text) ничего не найдено", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(alertAction)
+                present(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: nil, message: "Введите текст в строку для поиска", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(alertAction)
+                present(alert, animated: true, completion: nil)
+            }
         }
     }
     

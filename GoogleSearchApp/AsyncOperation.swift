@@ -53,7 +53,6 @@ extension AsyncOperation {
             state = .finished
             return
         }
-        
         main()
         state = .executing
     }

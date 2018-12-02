@@ -9,7 +9,7 @@
 import Foundation
 
 class ParseOperation: AsyncOperation {
-
+    
     var linkArray: [String]?
     private let _inputData: Data?
     
@@ -29,29 +29,29 @@ class ParseOperation: AsyncOperation {
     }
     
     override func main() {
-        guard self.state != .finished else { print("LoadOperation cancel"); return }
+        guard self.state != .finished else { return }
         var tempArray = [String]()
-//        self.completionBlock = {
-//            print("asdfvdfvdfvdf")
-//            
-//        }
         if let data = inputData {
             do {
-                if let jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                    guard self.state != .finished else { print("LoadOperation cancel"); return }
-                    let items = jsonResult["items"] as! [[String: AnyObject]]
-                    for item in items {
-                        print(item["link"]!)
-                        guard !isCancelled else { return }
-                        tempArray.append(item["link"] as! String)
+                let result = try JSONDecoder().decode(SearchResult.self, from: data)
+                print(result.searchInformation)
+                if let count = Int(result.searchInformation.totalResults) {
+                    if count > 0 {
+                        if let results = result.items {
+                            for res in results {
+                                guard !isCancelled else { return }
+                                tempArray.append(res.link)
+                            }
+                            self.linkArray = tempArray
+                            self.state = .finished
+                        }
+                    } else {
+                        self.state = .finished
                     }
-                    self.linkArray = tempArray
-                    self.state = .finished
                 }
             } catch {
-                print(error.localizedDescription)
+                print(error)
             }
         }
-        
     }
 }

@@ -24,7 +24,6 @@ class SearchAPI {
         parseOperation.addDependency(loadOperation)
         
         let block = BlockOperation {
-            print("block")
             complition(parseOperation.linkArray)
         }
         block.addDependency(parseOperation)
@@ -42,16 +41,20 @@ class SearchAPI {
         var urlString: String = searchText
         let startIndex = 1
         
+        // FIXME: идентификатор проекта: skilled-tiger-221019
+        // FIXME: идентификатор поисковой системы: 005505095743673218968:ploiaiqzo0c
+        // FIXME: Ключи API: AIzaSyB_tedj2v_efYUD4xZ4XYjVoehNs7G2CrM
+        
         urlString = urlString.replacingOccurrences(of: " ", with: "+")
         let apiKey = "AIzaSyB_tedj2v_efYUD4xZ4XYjVoehNs7G2CrM"
         let bundleId = "com.skilled-tiger-221019"
         let searchEngineId = "005505095743673218968:ploiaiqzo0c"
         let serverAddress = String(format: "https://www.googleapis.com/customsearch/v1?key=%@&cx=%@&q=%@&start=%d", apiKey, searchEngineId, urlString, startIndex)
         let url = serverAddress.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let finalUrl = URL(string: url!)
-        let request = NSMutableURLRequest(url: finalUrl!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
+        let finalUrl = URL(string: url!)!
+        var request = URLRequest(url: finalUrl, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
         request.httpMethod = "GET"
         request.setValue(bundleId, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
-        return request as URLRequest
+        return request
     }
 }
